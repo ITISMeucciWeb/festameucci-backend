@@ -10,7 +10,7 @@ export class User{
 
     @Field(()=>Boolean, {defaultValue: false})
     @Prop({required: true, default: false})
-    isIn: boolean;
+    isIn: boolean = false;
 
     @Field(()=>String)
     @Prop({required: true, index: true})
@@ -26,11 +26,11 @@ export class User{
 
     @Field(()=>Int, {nullable: true})
     @Prop({required: false, index: true})
-    class: number;
+    class?: number;
 
     @Field(()=>String, {nullable: true})
     @Prop({required: false, index: true})
-    division: string;
+    division?: string;
 }
 
 export type UserDocument = User & Document;

@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48428239-b854-4d81-b2e7-bba2ed00bf70" name="Changes" comment="Update" />
+    <list default="true" id="48428239-b854-4d81-b2e7-bba2ed00bf70" name="Changes" comment="Added backend">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/user/user.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/user/user.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/user/user.resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/user/user.resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/user/user.service.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +53,7 @@
     "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "app.teamhub.trackedBranches": "",
+    "app.teamhub.trackedBranches": "1tef2rf/master",
     "go.import.settings.migrated": "true",
     "javascript.nodejs.core.library.configured.version": "16.15.0",
     "javascript.nodejs.core.library.typings.version": "16.11.36",
@@ -56,10 +65,10 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "pnpm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "settings.editor.selected.configurable": "settings.nodejs",
     "ts.external.directory.path": "/home/dreamingcodes/Documents/IdeaProjects/festameucci/frontend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -82,7 +91,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1653425385865</updated>
-      <workItem from="1653425387225" duration="5447000" />
+      <workItem from="1653425387225" duration="5512000" />
+      <workItem from="1653471516042" duration="3810000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1653430790439</created>
@@ -91,7 +101,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653430790444</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added backend">
+      <created>1653430873181</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1653430873181</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,7 +131,8 @@
       <path value="$PROJECT_DIR$/backend" />
     </ignored-roots>
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Added backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added backend" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

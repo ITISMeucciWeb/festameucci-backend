@@ -1,20 +1,31 @@
-import {Mutation, Query, registerEnumType, Resolver} from '@nestjs/graphql';
+import {Args, Mutation, registerEnumType, Resolver, Subscription} from '@nestjs/graphql';
+import {CheckResult, CheckResultType, UserService} from "./user.service";
+import {Types} from "mongoose";
+import { MongodbPubSub } from 'graphql-mongoose-subscriptions';
 
-export enum CheckResult {
-    OK,
-    AlreadyIn,
-    NotFound
-}
+const pubsub = new MongodbPubSub();
 
 registerEnumType(CheckResult, {
     name: 'CheckResult',
-    description: 'Result of check mutation',
+    description: 'Result of update mutation',
 })
 
 @Resolver()
 export class UserResolver {
-    @Mutation(() => CheckResult)
-    checkUserById() {
-        return 'Hello World!';
+    constructor(private readonly userService: UserService) {}
+
+    @Mutation(() => CheckResultType)
+    updateStateById(@Args('id', {type: ()=> String}) id: Types.ObjectId) {
+        return this.userService.updateStateById(id);
+    }
+
+    @Subscription(() => Number)
+    getInCount() {
+        return pubsub.asyncIterator('inCount');
+    }
+
+    @Subscription(() => Number)
+    getRegisteredCount() {
+        return pubsub.asyncIterator('registeredCount');
     }
 }
