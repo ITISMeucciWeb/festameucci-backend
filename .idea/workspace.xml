@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48428239-b854-4d81-b2e7-bba2ed00bf70" name="Changes" comment="Update state and getInCount, getRegisteredCount ready">
-      <change afterPath="$PROJECT_DIR$/frontend/src/shaders/shaders.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/typefaces/Orbitron_Black.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/HomeView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tsconfig.json" afterDir="false" />
+    <list default="true" id="48428239-b854-4d81-b2e7-bba2ed00bf70" name="Changes" comment="Added dist to exluceded intellij folder">
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +111,7 @@
       <option name="presentableId" value="Default" />
       <updated>1653425385865</updated>
       <workItem from="1653425387225" duration="5512000" />
-      <workItem from="1653471516042" duration="35080000" />
+      <workItem from="1653471516042" duration="35442000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1653430790439</created>
@@ -141,7 +134,21 @@
       <option name="project" value="LOCAL" />
       <updated>1653475665120</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Animation working">
+      <created>1653516315602</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1653516315602</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added dist to exluceded intellij folder">
+      <created>1653516371862</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1653516371862</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,7 +173,9 @@
     <MESSAGE value="Update" />
     <MESSAGE value="Added backend" />
     <MESSAGE value="Update state and getInCount, getRegisteredCount ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update state and getInCount, getRegisteredCount ready" />
+    <MESSAGE value="Animation working" />
+    <MESSAGE value="Added dist to exluceded intellij folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added dist to exluceded intellij folder" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
