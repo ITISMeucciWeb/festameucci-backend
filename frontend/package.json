@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
+    "gsap": "^3.10.4",
     "pinia": "^2.0.13",
     "roboto-fontface": "*",
+    "sass": "^1.52.1",
+    "three": "0.134",
     "vue": "^3.2.33",
     "vue-router": "^4.0.14",
     "vuetify": "^3.0.0-beta.0",
@@ -19,6 +22,7 @@
   },
   "devDependencies": {
     "@types/node": "^16.11.27",
+    "@types/three": "0.134",
     "@types/webfontloader": "^1.0.0",
     "@vitejs/plugin-vue": "^2.3.1",
     "@vue/tsconfig": "^0.1.3",
