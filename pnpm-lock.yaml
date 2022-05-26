@@ -1,4 +1,4 @@
-lockfileVersion: 5.4
+lockfileVersion: 5.3
 
 specifiers:
   '@nestjs/cli': ^8.2.6
@@ -90,12 +90,12 @@ packages:
       '@angular-devkit/core': 13.3.5_chokidar@3.5.3
       '@angular-devkit/schematics': 13.3.5_chokidar@3.5.3
       '@angular-devkit/schematics-cli': 13.3.5_chokidar@3.5.3
-      '@nestjs/schematics': 8.0.11_rdhioqn4mnnehcosh27dxkrt2m
+      '@nestjs/schematics': 8.0.11_chokidar@3.5.3+typescript@4.6.4
       chalk: 3.0.0
       chokidar: 3.5.3
       cli-table3: 0.6.2
       commander: 4.1.1
-      fork-ts-checker-webpack-plugin: 7.2.11_gp3atwgq76mgimstdygasg64n4
+      fork-ts-checker-webpack-plugin: 7.2.11_typescript@4.6.4+webpack@5.72.1
       inquirer: 7.3.3
       node-emoji: 1.11.0
       ora: 5.4.1
@@ -117,7 +117,7 @@ packages:
       - webpack-cli
     dev: true
 
-  /@nestjs/schematics/8.0.11_rdhioqn4mnnehcosh27dxkrt2m:
+  /@nestjs/schematics/8.0.11_chokidar@3.5.3+typescript@4.6.4:
     resolution: {integrity: sha512-W/WzaxgH5aE01AiIErE9QrQJ73VR/M/8p8pq0LZmjmNcjZqU5kQyOWUxZg13WYfSpJdOa62t6TZRtFDmgZPoIg==}
     peerDependencies:
       typescript: ^3.4.5 || ^4.3.5
@@ -698,7 +698,7 @@ packages:
       to-regex-range: 5.0.1
     dev: true
 
-  /fork-ts-checker-webpack-plugin/7.2.11_gp3atwgq76mgimstdygasg64n4:
+  /fork-ts-checker-webpack-plugin/7.2.11_typescript@4.6.4+webpack@5.72.1:
     resolution: {integrity: sha512-2e5+NyTUTE1Xq4fWo7KFEQblCaIvvINQwUX3jRmEGlgCTc1Ecqw/975EfQrQ0GEraxJTnp8KB9d/c8hlCHUMJA==}
     engines: {node: '>=12.13.0', yarn: '>=1.0.0'}
     peerDependencies:

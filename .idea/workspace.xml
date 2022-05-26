@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48428239-b854-4d81-b2e7-bba2ed00bf70" name="Changes" comment="Added dist to exluceded intellij folder">
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +52,7 @@
     "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "app.teamhub.trackedBranches": "1tef2rf/master",
+    "app.teamhub.trackedBranches": "-1u1ho78/master",
     "go.import.settings.migrated": "true",
     "javascript.nodejs.core.library.configured.version": "16.15.0",
     "javascript.nodejs.core.library.typings.version": "16.11.36",
@@ -62,8 +67,8 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "/home/dreamingcodes/Documents/IdeaProjects/festameucci/frontend/node_modules/typescript/lib",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/home/dreamingcodes/IdeaProjects/festameucci/frontend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -112,6 +117,8 @@
       <updated>1653425385865</updated>
       <workItem from="1653425387225" duration="5512000" />
       <workItem from="1653471516042" duration="35442000" />
+      <workItem from="1653556403055" duration="74000" />
+      <workItem from="1653556501136" duration="451000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1653430790439</created>
