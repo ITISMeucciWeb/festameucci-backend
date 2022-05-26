@@ -10,6 +10,7 @@ specifiers:
   '@vue/tsconfig': ^0.1.3
   gsap: ^3.10.4
   pinia: ^2.0.13
+  resize-observer: ^1.0.4
   roboto-fontface: '*'
   sass: ^1.52.1
   three: '0.134'
@@ -43,6 +44,7 @@ devDependencies:
   '@vitejs/plugin-legacy': 1.8.2_vite@2.9.9
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.9+vue@3.2.36
   '@vue/tsconfig': 0.1.3_@types+node@16.11.36
+  resize-observer: 1.0.4
   typescript: 4.6.4
   vite: 2.9.9_sass@1.52.1
   vite-plugin-vuetify: 1.0.0-alpha.11_vite@2.9.9+vuetify@3.0.0-beta.2
@@ -892,6 +894,10 @@ packages:
 
   /regenerator-runtime/0.13.9:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
+    dev: true
+
+  /resize-observer/1.0.4:
+    resolution: {integrity: sha512-AQ2MdkWTng9d6JtjHvljiQR949qdae91pjSNugGGeOFzKIuLHvoZIYhUTjePla5hCFDwQHrnkciAIzjzdsTZew==}
     dev: true
 
   /resolve/1.22.0:

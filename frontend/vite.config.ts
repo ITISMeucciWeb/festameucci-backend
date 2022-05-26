@@ -14,7 +14,9 @@ export default defineConfig({
       autoImport: true,
     }),
     legacy({
-      targets: ['defaults', 'not IE 11']
+      targets: ['defaults'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+
     }),
   ],
   server:{

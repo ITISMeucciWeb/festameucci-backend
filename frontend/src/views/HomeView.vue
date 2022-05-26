@@ -32,7 +32,7 @@ const appContainer = ref<HTMLDivElement | null>(null);
 
 
 onMounted(async () => {
-  let boxMaterial: ShaderMaterial | null = null;
+  let boxMaterialMeucci: ShaderMaterial | null = null;
   const rowCount = 36;
   const columnCount = 30;
   const layerCount = 3;
@@ -71,7 +71,7 @@ onMounted(async () => {
 
   addEventListener('resize', onWindowResize, false);
 
-  await renderTargetPrepare();
+  await renderTargetsPrepare();
   animate(0);
 
   function onWindowResize() {
@@ -120,55 +120,56 @@ onMounted(async () => {
         }, "=-1")
   }, 2000);
 
-  async function renderTargetPrepare(){
-    const renderTarget = new WebGLRenderTarget(innerWidth, innerHeight);
-    const renderTargetCamera = new PerspectiveCamera(45, 1, 0.1, 1000);
-    renderTargetCamera.position.z = 2.5;
-
-    const renderTargetScene = new Scene();
-    renderTargetScene.background = new Color(0x00000000);
-
-
+  async function renderTargetsPrepare(){
     const loader = new FontLoader();
     const font = await new Promise((resolve) => {
       loader.load(OrbitronBlack, resolve);
     }) as Font;
-    const textGeometry = new TextGeometry('ITIS MEUCCI', {
+
+
+    const renderTargetMeucci = new WebGLRenderTarget(innerWidth, innerHeight);
+    const renderTargetCameraMeucci = new PerspectiveCamera(45, 1, 0.1, 1000);
+    renderTargetCameraMeucci.position.z = 2.5;
+
+    const renderTargetSceneMeucci = new Scene();
+    renderTargetSceneMeucci.background = new Color(0x00000000);
+
+    const textGeometryMeucci = new TextGeometry('ITIS MEUCCI', {
       font: font,
       size: 80,
     });
-    const textMaterial = new MeshBasicMaterial({color: 0xfffffff, side: DoubleSide, transparent: true});
+    const textMaterialMeucci = new MeshBasicMaterial({color: 0xfffffff, side: DoubleSide, transparent: true});
 
-    const textMesh = new Mesh(textGeometry, textMaterial);
-    textMesh.position.set(-0.965, -0.6, 0);
-    textMesh.rotation.set(Math.PI, -0.5, 0);
-    textMesh.scale.set(0.004, -0.015, 0);
-    renderTargetScene.add(textMesh);
+    const textMeshMeucci = new Mesh(textGeometryMeucci, textMaterialMeucci);
+    textMeshMeucci.position.set(-0.965, -0.6, 0);
+    textMeshMeucci.rotation.set(Math.PI, -0.5, 0);
+    textMeshMeucci.scale.set(0.004, -0.015, 0);
+    renderTargetSceneMeucci.add(textMeshMeucci);
 
     const boxGeometry = new TorusKnotGeometry(9, 3, 768, 3, 4, 3);
-    boxMaterial = new ShaderMaterial({
+    boxMaterialMeucci = new ShaderMaterial({
       vertexShader: vertexShader,
       fragmentShader: fragmentShader,
       uniforms: {
         uTime: { value: 0 },
-        uTexture: { value: renderTarget.texture },
+        uTexture: { value: renderTargetMeucci.texture },
       }
     })
 
-    const boxMesh = new Mesh(boxGeometry, boxMaterial);
-    boxMesh.scale.set(0.1, 0.1, 0.1);
-    boxMesh.rotation.set(-(Math.PI / 2), 0, 0);
-    boxMesh.position.set(0, -40, 0);
+    const boxMeshMeucci = new Mesh(boxGeometry, boxMaterialMeucci);
+    boxMeshMeucci.scale.set(0.1, 0.1, 0.1);
+    boxMeshMeucci.rotation.set(-(Math.PI / 2), 0, 0);
+    boxMeshMeucci.position.set(0, -40, 0);
 
-    scene.add(boxMesh);
+    scene.add(boxMeshMeucci);
 
-    renderer.setRenderTarget(renderTarget);
-    renderer.render(renderTargetScene, renderTargetCamera);
+    renderer.setRenderTarget(renderTargetMeucci);
+    renderer.render(renderTargetSceneMeucci, renderTargetCameraMeucci);
     renderer.setRenderTarget(null);
 
   }
   function render(time: number) {
-    boxMaterial!.uniforms.uTime.value = time;
+    boxMaterialMeucci!.uniforms.uTime.value = time;
     let i = 0;
 
     for (let x = 0; x < rowCount; x++) {
