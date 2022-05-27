@@ -41,7 +41,7 @@ onMounted(async () => {
 
   const dummy = new Object3D();
 
-  const camera = new PerspectiveCamera(60, document.documentElement.clientWidth / document.documentElement.clientHeight, 1, 1000);
+  const camera = new PerspectiveCamera(60, innerWidth / innerHeight, 1, 1000);
   camera.position.set(6, 7, 0);
   camera.lookAt(0.3, 0, 0);
   const scene = new Scene();
@@ -68,7 +68,7 @@ onMounted(async () => {
 
   const renderer = new WebGLRenderer({antialias: true});
   renderer.setPixelRatio(devicePixelRatio);
-  renderer.setSize(document.documentElement.clientWidth, document.documentElement.clientHeight);
+  renderer.setSize(innerWidth, innerHeight);
   appContainer.value!.appendChild(renderer.domElement);
 
   addEventListener('resize', onWindowResize, false);
@@ -77,9 +77,10 @@ onMounted(async () => {
   animate(0);
 
   function onWindowResize() {
-    camera.aspect = document.documentElement.clientWidth / document.documentElement.clientHeight;
+    camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(document.documentElement.clientWidth, document.documentElement.clientHeight);
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(devicePixelRatio);
   }
 
   function animate(time: number) {
@@ -87,7 +88,7 @@ onMounted(async () => {
 
     boxMaterialMeucci!.uniforms.uTime.value = animTime / 1.5;
     boxMaterialNick!.uniforms.uTime.value = animTime;
-    if(renderingHole){
+    if (renderingHole) {
       renderHole(animTime);
     }
     renderer.render(scene, camera);
@@ -165,11 +166,11 @@ onMounted(async () => {
       loader.load(OrbitronBlack, resolve);
     }) as Font;
 
-    const renderTargetMeucci = new WebGLRenderTarget(document.documentElement.clientWidth, document.documentElement.clientHeight);
+    const renderTargetMeucci = new WebGLRenderTarget(innerWidth, innerHeight);
     const renderTargetCameraMeucci = new PerspectiveCamera(45, 1, 0.1, 1000);
     renderTargetCameraMeucci.position.z = 2.5;
 
-    const renderTargetNick = new WebGLRenderTarget(document.documentElement.clientWidth, document.documentElement.clientHeight);
+    const renderTargetNick = new WebGLRenderTarget(innerWidth, innerHeight);
     const renderTargetCameraNick = new PerspectiveCamera(45, 1, 0.1, 1000);
     renderTargetCameraNick.position.z = 2.5;
 
@@ -288,3 +289,13 @@ onMounted(async () => {
     <div ref="appContainer"></div>
   </v-container>
 </template>
+<style>
+canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+</style>
