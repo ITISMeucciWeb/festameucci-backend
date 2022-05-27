@@ -21,7 +21,7 @@ export default defineComponent({
 </script>
 <style>
 html {
-  overflow-y: auto !important;
+  overflow-y: hidden !important;
   line-height: 0 !important;
 }
 
