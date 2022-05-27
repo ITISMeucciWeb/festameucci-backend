@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48428239-b854-4d81-b2e7-bba2ed00bf70" name="Changes" comment="Removed .idea/workspace.xml">
+    <list default="true" id="48428239-b854-4d81-b2e7-bba2ed00bf70" name="Changes" comment="Fixed ResizeObserver with an hack that inject a fake ResizeObserver class if is undefined">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/HomeView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +83,7 @@
       <recent name="$PROJECT_DIR$/backend/src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.exposedDev">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:8080">
       <method v="2" />
     </configuration>
@@ -133,10 +129,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.exposedDev" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.exposedServe" />
         <item itemvalue="npm.preview" />
-        <item itemvalue="npm.exposedDev" />
       </list>
     </recent_temporary>
   </component>
@@ -152,7 +148,8 @@
       <workItem from="1653471516042" duration="35442000" />
       <workItem from="1653556403055" duration="74000" />
       <workItem from="1653556501136" duration="8346000" />
-      <workItem from="1653602305964" duration="395000" />
+      <workItem from="1653602305964" duration="789000" />
+      <workItem from="1653640127918" duration="1307000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1653430790439</created>
@@ -210,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653558023325</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fixed ResizeObserver with an hack that inject a fake ResizeObserver class if is undefined">
+      <created>1653602833349</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1653602833350</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,7 +244,8 @@
     <MESSAGE value="Updated vite-plugin-vuetify" />
     <MESSAGE value="Improved website compatibility" />
     <MESSAGE value="Removed .idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed .idea/workspace.xml" />
+    <MESSAGE value="Fixed ResizeObserver with an hack that inject a fake ResizeObserver class if is undefined" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed ResizeObserver with an hack that inject a fake ResizeObserver class if is undefined" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
