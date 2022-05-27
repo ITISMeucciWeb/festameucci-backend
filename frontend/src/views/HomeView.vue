@@ -27,14 +27,21 @@ const appContainer = ref<HTMLDivElement | null>(null);
 
 onMounted(async () => {
   let boxMaterialMeucci: ShaderMaterial | null = null;
+  let boxMeshMeucci: Mesh | null = null;
   let boxMaterialNick: ShaderMaterial | null = null;
   const rowCount = 36;
   const columnCount = 30;
   const layerCount = 3;
+  let dummyScale = {
+    x: 0.5,
+    y: 1,
+    z: 0.5,
+  }
+  let renderingHole = true;
 
   const dummy = new Object3D();
 
-  const camera = new PerspectiveCamera(60, innerWidth / innerHeight, 1, 1000);
+  const camera = new PerspectiveCamera(60, document.documentElement.clientWidth / document.documentElement.clientHeight, 1, 1000);
   camera.position.set(6, 7, 0);
   camera.lookAt(0.3, 0, 0);
   const scene = new Scene();
@@ -61,7 +68,7 @@ onMounted(async () => {
 
   const renderer = new WebGLRenderer({antialias: true});
   renderer.setPixelRatio(devicePixelRatio);
-  renderer.setSize(innerWidth, innerHeight);
+  renderer.setSize(document.documentElement.clientWidth, document.documentElement.clientHeight);
   appContainer.value!.appendChild(renderer.domElement);
 
   addEventListener('resize', onWindowResize, false);
@@ -70,13 +77,20 @@ onMounted(async () => {
   animate(0);
 
   function onWindowResize() {
-    camera.aspect = innerWidth / innerHeight;
+    camera.aspect = document.documentElement.clientWidth / document.documentElement.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth, innerHeight);
+    renderer.setSize(document.documentElement.clientWidth, document.documentElement.clientHeight);
   }
 
   function animate(time: number) {
-    render(time / 1000);
+    const animTime = time / 1000;
+
+    boxMaterialMeucci!.uniforms.uTime.value = animTime / 1.5;
+    boxMaterialNick!.uniforms.uTime.value = animTime;
+    if(renderingHole){
+      renderHole(animTime);
+    }
+    renderer.render(scene, camera);
     requestAnimationFrame(animate);
   }
 
@@ -129,8 +143,20 @@ onMounted(async () => {
         .to(camera.rotation, {
           z: Math.PI * 3,
           duration: 0.5,
-          ease: 'power2.inOut'
+          ease: 'power2.inOut',
         }, "=-0.8")
+        .to(dummyScale, {
+          delay: 0.5,
+          x: 0,
+          y: 0,
+          z: 0,
+          duration: 1,
+          onComplete: () => {
+            renderingHole = false;
+            scene.remove(mesh);
+          }
+        })
+
   }, 2000);
 
   async function renderTargetsPrepare() {
@@ -139,11 +165,11 @@ onMounted(async () => {
       loader.load(OrbitronBlack, resolve);
     }) as Font;
 
-    const renderTargetMeucci = new WebGLRenderTarget(innerWidth, innerHeight);
+    const renderTargetMeucci = new WebGLRenderTarget(document.documentElement.clientWidth, document.documentElement.clientHeight);
     const renderTargetCameraMeucci = new PerspectiveCamera(45, 1, 0.1, 1000);
     renderTargetCameraMeucci.position.z = 2.5;
 
-    const renderTargetNick = new WebGLRenderTarget(innerWidth, innerHeight);
+    const renderTargetNick = new WebGLRenderTarget(document.documentElement.clientWidth, document.documentElement.clientHeight);
     const renderTargetCameraNick = new PerspectiveCamera(45, 1, 0.1, 1000);
     renderTargetCameraNick.position.z = 2.5;
 
@@ -196,7 +222,7 @@ onMounted(async () => {
       }
     })
 
-    const boxMeshMeucci = new Mesh(boxGeometry, boxMaterialMeucci);
+    boxMeshMeucci = new Mesh(boxGeometry, boxMaterialMeucci);
     boxMeshMeucci.scale.set(0.1, 0.1, 0.1);
     boxMeshMeucci.rotation.set(-(Math.PI / 2), 0, 0);
     boxMeshMeucci.position.set(0, -40, 0);
@@ -220,9 +246,7 @@ onMounted(async () => {
 
   }
 
-  function render(time: number) {
-    boxMaterialMeucci!.uniforms.uTime.value = time;
-    boxMaterialNick!.uniforms.uTime.value = time;
+  function renderHole(time: number) {
     let i = 0;
 
     for (let x = 0; x < rowCount; x++) {
@@ -245,7 +269,7 @@ onMounted(async () => {
 
           dummy.position.set(X * (z + 4 - t), Y, Z * (z + 4 - t));
           dummy.rotation.y = -a;
-          dummy.scale.set(0.5, 1, 0.5)
+          dummy.scale.set(dummyScale.x, dummyScale.y, dummyScale.z);
           dummy.updateMatrix();
 
           mesh.setMatrixAt(i++, dummy.matrix);
@@ -253,8 +277,7 @@ onMounted(async () => {
       }
     }
     mesh.instanceMatrix.needsUpdate = true;
-    scene.rotation.y = time / 10;
-    renderer.render(scene, camera);
+    mesh.rotation.y = time / 10;
   }
 
 

@@ -22,5 +22,7 @@ export default defineComponent({
 <style>
 html {
   overflow-y: auto !important;
+  line-height: 0 !important;
 }
+
 </style>
