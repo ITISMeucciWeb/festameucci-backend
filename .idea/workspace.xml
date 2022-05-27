@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48428239-b854-4d81-b2e7-bba2ed00bf70" name="Changes" comment="Fixed ResizeObserver with an hack that inject a fake ResizeObserver class if is undefined">
+    <list default="true" id="48428239-b854-4d81-b2e7-bba2ed00bf70" name="Changes" comment="Added nickname circle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/HomeView.vue" afterDir="false" />
     </list>
@@ -149,7 +149,7 @@
       <workItem from="1653556403055" duration="74000" />
       <workItem from="1653556501136" duration="8346000" />
       <workItem from="1653602305964" duration="789000" />
-      <workItem from="1653640127918" duration="1307000" />
+      <workItem from="1653640127918" duration="1457000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1653430790439</created>
@@ -214,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653602833350</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added nickname circle">
+      <created>1653641472787</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1653641472788</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +252,8 @@
     <MESSAGE value="Improved website compatibility" />
     <MESSAGE value="Removed .idea/workspace.xml" />
     <MESSAGE value="Fixed ResizeObserver with an hack that inject a fake ResizeObserver class if is undefined" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed ResizeObserver with an hack that inject a fake ResizeObserver class if is undefined" />
+    <MESSAGE value="Added nickname circle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added nickname circle" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

@@ -115,6 +115,7 @@ onMounted(async () => {
         }, "=-1")
         .to(camera.position, {
           duration: 0.7,
+          delay: 0.5,
           x: 0,
           y: -10,
           ease: 'power2.inOut'
