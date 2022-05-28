@@ -291,10 +291,10 @@ onMounted(async () => {
 </template>
 <style>
 canvas {
-  width: 100vw;
-  height: 100vh;
+  width: 100vw !important;
+  height: 100vh !important;
   display: block;
-  position: fixed;
+  position: absolute !important;
   top: 0;
   left: 0;
 }
