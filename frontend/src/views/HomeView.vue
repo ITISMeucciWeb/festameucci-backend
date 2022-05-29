@@ -191,6 +191,7 @@ onMounted(async () => {
             console.log(visibleHeight, visibleWidth);
           }
         })
+        /*1
         .to(boxMeshMeucci!.position, {
           duration: 1,
           x: ()=>visibleWidth / 2.0 - 0.3,
@@ -205,6 +206,8 @@ onMounted(async () => {
           y: 0.02,
           z: 0.02
         }, "finalPosition")
+
+         */
 
   }, 2000);
 
