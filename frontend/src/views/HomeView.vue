@@ -13,7 +13,7 @@ import {
   Mesh,
   DoubleSide,
   ShaderMaterial,
-  WebGLRenderTarget, Color, TorusKnotGeometry,
+  WebGLRenderTarget, Color, TorusKnotGeometry, Vector3, OrthographicCamera, Camera,
 } from "three";
 import OrbitronBlack from "../typefaces/Orbitron_Black.json?url";
 import {onMounted, ref} from "vue";
@@ -24,24 +24,46 @@ import {fragmentShader, vertexShader} from "@/shaders/shaders";
 
 const appContainer = ref<HTMLDivElement | null>(null);
 
+let boxMaterialMeucci: ShaderMaterial | null = null;
+let boxMeshMeucci: Mesh | null = null;
+let boxMaterialNick: ShaderMaterial | null = null;
+const rowCount = 36;
+const columnCount = 30;
+const layerCount = 3;
+let dummyScale = {
+  x: 0.5,
+  y: 1,
+  z: 0.5,
+}
+let visibleWidth: number;
+let visibleHeight: number;
+let renderingHole = true;
+
+let animationCompleted = false;
+
+function visibleHeightAtZDepth(depth: number, camera: PerspectiveCamera) {
+  // vertical fov in radians
+  const vFOV = camera.fov * Math.PI / 180;
+
+  // Math.abs to ensure the result is always positive
+  return 2 * Math.tan(vFOV / 2) * Math.abs(depth);
+};
+
+
+function visibleWidthAtZDepth(depth: number, camera: PerspectiveCamera) {
+  const height = visibleHeightAtZDepth(depth, camera);
+  return height * camera.aspect;
+}
+
+function updateVisibleArea(camera: PerspectiveCamera) {
+  visibleWidth = visibleWidthAtZDepth(5, camera);
+  visibleHeight = visibleHeightAtZDepth(5, camera);
+}
 
 onMounted(async () => {
-  let boxMaterialMeucci: ShaderMaterial | null = null;
-  let boxMeshMeucci: Mesh | null = null;
-  let boxMaterialNick: ShaderMaterial | null = null;
-  const rowCount = 36;
-  const columnCount = 30;
-  const layerCount = 3;
-  let dummyScale = {
-    x: 0.5,
-    y: 1,
-    z: 0.5,
-  }
-  let renderingHole = true;
-
   const dummy = new Object3D();
 
-  const camera = new PerspectiveCamera(60, innerWidth / innerHeight, 1, 1000);
+  let camera: PerspectiveCamera = new PerspectiveCamera(60, innerWidth / innerHeight, 1, 1000);
   camera.position.set(6, 7, 0);
   camera.lookAt(0.3, 0, 0);
   const scene = new Scene();
@@ -71,17 +93,22 @@ onMounted(async () => {
   renderer.setSize(innerWidth, innerHeight);
   appContainer.value!.appendChild(renderer.domElement);
 
-  addEventListener('resize', onWindowResize, false);
-
-  await renderTargetsPrepare();
-  animate(0);
-
-  function onWindowResize() {
+  addEventListener('resize', ()=>{
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight);
     renderer.setPixelRatio(devicePixelRatio);
-  }
+
+    updateVisibleArea(camera);
+
+    if(animationCompleted){
+      boxMeshMeucci!.position.x = visibleWidth / 2 - 0.3;
+      boxMeshMeucci!.position.z = visibleHeight / 2 - 0.3;
+    }
+  }, false);
+
+  await renderTargetsPrepare();
+  animate(0);
 
   function animate(time: number) {
     const animTime = time / 1000;
@@ -155,8 +182,29 @@ onMounted(async () => {
           onComplete: () => {
             renderingHole = false;
             scene.remove(mesh);
+            if (!visibleHeight) {
+              updateVisibleArea(camera);
+            }
+            if (!visibleWidth) {
+              updateVisibleArea(camera);
+            }
+            console.log(visibleHeight, visibleWidth);
           }
         })
+        .to(boxMeshMeucci!.position, {
+          duration: 1,
+          x: ()=>visibleWidth / 2.0 - 0.3,
+          z: ()=>visibleHeight / 2.0 - 0.3,
+          onComplete: () => {
+            animationCompleted = true;
+          }
+        }, "finalPosition")
+        .to(boxMeshMeucci!.scale, {
+          duration: 1,
+          x: 0.02,
+          y: 0.02,
+          z: 0.02
+        }, "finalPosition")
 
   }, 2000);
 
