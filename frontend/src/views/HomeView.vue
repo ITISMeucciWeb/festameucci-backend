@@ -250,17 +250,17 @@ onMounted(async () => {
         .to(boxMeshMeucci!.scale, {
           duration: 1,
           delay: 1,
-          x: 0.05,
-          y: 0.05,
-          z: 0.05,
+          x: 0.035,
+          y: 0.035,
+          z: 0.035,
           ease: 'power2.inOut',
         }, "enterqr")
         .to(svgGroup.scale, {
           duration: 1,
           delay: 1,
-          x: 1,
-          y: 1,
-          z: 1,
+          x: 0.7,
+          y: 0.7,
+          z: 0.7,
           ease: 'power2.inOut',
         }, "enterqr")
   }
