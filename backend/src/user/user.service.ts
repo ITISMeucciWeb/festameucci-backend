@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import {Model, Types} from "mongoose";
 import {InjectModel} from "@nestjs/mongoose";
 import {User, UserDocument} from "./user.entity";
-import {Field, ObjectType} from "@nestjs/graphql";
 
 import { MongodbPubSub } from 'graphql-mongoose-subscriptions';
 
@@ -14,20 +13,6 @@ export enum CheckResult {
     NotFound
 }
 
-@ObjectType({
-    description: 'Result of update mutation. If NotFound, name and surname are null',
-})
-export class CheckResultType {
-
-    @Field(() => CheckResult)
-    result: CheckResult;
-
-    @Field(() => String, {nullable: true})
-    name?: string;
-
-    @Field(() => String, {nullable: true})
-    surname?: string;
-}
 
 @Injectable()
 export class UserService {
@@ -45,18 +30,16 @@ export class UserService {
         return [1, 'A'];
     }
 
-    async updateStateById(id: Types.ObjectId): Promise<CheckResultType> {
+    async updateStateById(id: Types.ObjectId): Promise<CheckResult> {
         const user = await this.UserModel.findById(id).select({'isIn': 1, 'name': 1, 'surname': 1});
-        const result = new CheckResultType();
+        let result: CheckResult;
         if(!user) {
-            result.result = CheckResult.NotFound;
+            result = CheckResult.NotFound;
         }else {
-            result.name = user.name;
-            result.surname = user.surname;
             if(user.isIn) {
-                result.result = CheckResult.AlreadyIn;
+                result = CheckResult.AlreadyIn;
             }else {
-                result.result = CheckResult.OK;
+                result = CheckResult.OK;
                 user.isIn = true;
                 await user.save();
                 this.inCount++;
@@ -75,5 +58,16 @@ export class UserService {
     updateTotalCount() {
         // noinspection TypeScriptValidateJSTypes
         pubsub.publish('registeredCount', this.registeredCount);
+    }
+
+    async processUser(email: string, name: string, surname: string){
+        const dbUser = await this.UserModel.findOne({email: email}, {}, {collation: {locale: "it", strength: 1}}).exec();
+
+        if(!dbUser) {
+            const userInfo = this.getClassByNameAndSurName(name, surname);
+            return await new this.UserModel({email: email, class: userInfo[0], division: userInfo[1]}).save();
+        }
+
+        return dbUser;
     }
 }

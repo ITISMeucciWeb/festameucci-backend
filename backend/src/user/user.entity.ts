@@ -10,15 +10,11 @@ export class User{
 
     @Field(()=>Boolean, {defaultValue: false})
     @Prop({required: true, default: false})
+    admin: boolean = false;
+
+    @Field(()=>Boolean, {defaultValue: false})
+    @Prop({required: true, default: false})
     isIn: boolean = false;
-
-    @Field(()=>String)
-    @Prop({required: true, index: true})
-    name: string;
-
-    @Field(()=>String)
-    @Prop({required: true, index: true})
-    surname: string;
 
     @Field(()=>String)
     @Prop({required: true, index: true})

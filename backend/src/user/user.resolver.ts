@@ -1,5 +1,5 @@
 import {Args, Mutation, registerEnumType, Resolver, Subscription} from '@nestjs/graphql';
-import {CheckResult, CheckResultType, UserService} from "./user.service";
+import {CheckResult, UserService} from "./user.service";
 import {Types} from "mongoose";
 import { MongodbPubSub } from 'graphql-mongoose-subscriptions';
 
@@ -14,7 +14,7 @@ registerEnumType(CheckResult, {
 export class UserResolver {
     constructor(private readonly userService: UserService) {}
 
-    @Mutation(() => CheckResultType)
+    @Mutation(() => CheckResult)
     updateStateById(@Args('id', {type: ()=> String}) id: Types.ObjectId) {
         return this.userService.updateStateById(id);
     }

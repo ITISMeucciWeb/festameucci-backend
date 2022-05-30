@@ -7,10 +7,13 @@ import {join} from 'path';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { AppResolver } from './app.resolver';
+import { GoogleModule } from './google/google.module';
+import {ConfigModule} from "@nestjs/config";
 
 
 @Module({
     imports: [
+        ConfigModule.forRoot(),
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
             autoSchemaFile: join(process.cwd(), 'schema.gql'),
@@ -19,7 +22,8 @@ import { AppResolver } from './app.resolver';
             }
         }),
         MongooseModule.forRoot('mongodb://localhost/festameucci'),
-        UserModule
+        UserModule,
+        GoogleModule
     ],
     controllers: [AppController],
     providers: [AppService, AppResolver],
