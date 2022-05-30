@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: 'Dockerfile'
+    env_file:
+      - .env
+    environment:
+      - "DB_HOST=mongo"
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    image: mongo

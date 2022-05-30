@@ -21,7 +21,7 @@ import {ConfigModule} from "@nestjs/config";
                 'graphql-ws': true
             }
         }),
-        MongooseModule.forRoot('mongodb://localhost/festameucci'),
+        MongooseModule.forRoot(`mongodb://${process.env.DB_HOST || "localhost"}/festameucci`),
         UserModule,
         GoogleModule
     ],
