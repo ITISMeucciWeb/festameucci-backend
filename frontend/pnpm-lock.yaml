@@ -8,6 +8,7 @@ specifiers:
   '@vitejs/plugin-legacy': ^1.8.2
   '@vitejs/plugin-vue': ^2.3.1
   '@vue/tsconfig': ^0.1.3
+  easyqrcodejs: ^4.4.10
   gsap: ^3.10.4
   pinia: ^2.0.13
   resize-observer: ^1.0.4
@@ -19,7 +20,6 @@ specifiers:
   vite-plugin-vuetify: ^1.0.0-alpha.11
   vue: ^3.2.33
   vue-cli-plugin-vuetify: ^2.5.0
-  vue-router: ^4.0.14
   vue-tsc: ^0.34.7
   vuetify: ^3.0.0-beta.0
   webfontloader: ^1.0.0
@@ -27,13 +27,13 @@ specifiers:
 
 dependencies:
   '@mdi/font': 5.9.55
+  easyqrcodejs: 4.4.10
   gsap: 3.10.4
   pinia: 2.0.14_7gwbvmtszsbbeay4sidijbp26i
   roboto-fontface: 0.10.0
   sass: 1.52.1
   three: 0.134.0
   vue: 3.2.36
-  vue-router: 4.0.15_vue@3.2.36
   vuetify: 3.0.0-beta.2_vue@3.2.36
   webfontloader: 1.6.28
 
@@ -350,6 +350,10 @@ packages:
     dependencies:
       callsite: 1.0.0
     dev: true
+
+  /easyqrcodejs/4.4.10:
+    resolution: {integrity: sha512-DEr/Txdyfo0RsKuC0tX6t72GF5oqNFbnKVL9dTLatL5yiLJaId65BSfa5HKl4FaJt71yRX3DF1sf977FwynWtw==}
+    dev: false
 
   /emojis-list/3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
@@ -1063,15 +1067,6 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      vue: 3.2.36
-    dev: false
-
-  /vue-router/4.0.15_vue@3.2.36:
-    resolution: {integrity: sha512-xa+pIN9ZqORdIW1MkN2+d9Ui2pCM1b/UMgwYUCZOiFYHAvz/slKKBDha8DLrh5aCG/RibtrpyhKjKOZ85tYyWg==}
-    peerDependencies:
-      vue: ^3.2.0
-    dependencies:
-      '@vue/devtools-api': 6.1.4
       vue: 3.2.36
     dev: false
 

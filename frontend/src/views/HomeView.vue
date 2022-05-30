@@ -1,19 +1,25 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 
 import {
-  Scene,
-  WebGLRenderer,
-  PerspectiveCamera,
-  Object3D,
+  Box3,
   BoxBufferGeometry,
-  MeshBasicMaterial,
-  InstancedMesh,
-  DynamicDrawUsage,
   CanvasTexture,
-  Mesh,
+  Color,
   DoubleSide,
+  DynamicDrawUsage,
+  ExtrudeBufferGeometry,
+  Group,
+  InstancedMesh,
+  Mesh,
+  MeshBasicMaterial,
+  Object3D,
+  PerspectiveCamera,
+  Scene,
   ShaderMaterial,
-  WebGLRenderTarget, Color, TorusKnotGeometry,
+  TorusKnotGeometry,
+  Vector3,
+  WebGLRenderer,
+  WebGLRenderTarget,
 } from "three";
 import OrbitronBlack from "../typefaces/Orbitron_Black.json?url";
 import {onMounted, ref} from "vue";
@@ -21,6 +27,8 @@ import gsap from "gsap";
 import {Font, FontLoader} from "three/examples/jsm/loaders/FontLoader";
 import {TextGeometry} from "three/examples/jsm/geometries/TextGeometry";
 import {fragmentShader, vertexShader} from "@/shaders/shaders";
+import QRCode from "easyqrcodejs";
+import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
 
 const appContainer = ref<HTMLDivElement | null>(null);
 
@@ -36,6 +44,17 @@ let dummyScale = {
   z: 0.5,
 }
 let renderingHole = true;
+
+let doTheInitialAnimation = true;
+
+let params = new URLSearchParams(window.location.search);
+let id = params.get("id");
+if (id) {
+  localStorage.setItem("id", id);
+  doTheInitialAnimation = false;
+} else {
+  id = localStorage.getItem("id");
+}
 
 onMounted(async () => {
   const dummy = new Object3D();
@@ -70,7 +89,7 @@ onMounted(async () => {
   renderer.setSize(innerWidth, innerHeight);
   appContainer.value!.appendChild(renderer.domElement);
 
-  addEventListener('resize', ()=>{
+  addEventListener('resize', () => {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight);
@@ -92,11 +111,12 @@ onMounted(async () => {
     requestAnimationFrame(animate);
   }
 
-  setTimeout(() => {
+  if (doTheInitialAnimation) {
     const timeLine = gsap.timeline();
 
     timeLine
         .to(camera.position, {
+          delay: 2,
           duration: 2,
           x: 0,
           y: 15,
@@ -104,6 +124,7 @@ onMounted(async () => {
         }, "out")
         .to(camera.rotation, {
           duration: 2,
+          delay: 2,
           x: -(Math.PI / 2),
           y: 0,
           ease: 'power2.inOut'
@@ -144,7 +165,7 @@ onMounted(async () => {
           ease: 'power2.inOut',
         }, "=-0.8")
         .to(dummyScale, {
-          delay: 0.5,
+          delay: 0.008,
           x: 0,
           y: 0,
           z: 0,
@@ -152,10 +173,98 @@ onMounted(async () => {
           onComplete: () => {
             renderingHole = false;
             scene.remove(mesh);
+            if (!id) {
+              setTimeout(() => {
+                window.location.href = import.meta.env.VITE_BACKEND_API_URL + "google/redirect";
+              }, 1000)
+            } else {
+              spawnQr();
+            }
           }
         })
+  } else {
+    renderingHole = false;
+    scene.remove(mesh);
+    camera.position.set(0, -35, 0);
+    camera.rotation.set(-(Math.PI / 2), 0, Math.PI * 3);
 
-  }, 2000);
+    spawnQr();
+  }
+
+  async function spawnQr() {
+    const qrSVG = await new Promise<string>((resolve) => {
+      new QRCode("test", {
+        text: id,
+        correctLevel: QRCode.CorrectLevel.H,
+        drawer: "svg",
+        onRenderingEnd: (_: object, svg: string) => {
+          resolve(svg)
+        },
+        backgroundImageAlpha: 0
+      });
+    })
+    console.log(qrSVG);
+
+    const svgData = new SVGLoader().parse(qrSVG);
+
+    const svgGroup = new Group();
+    const fillMaterial = new MeshBasicMaterial({color: "#F3FBFB"});
+
+    svgGroup.scale.y *= -1;
+    svgData.paths.forEach((path) => {
+      if (path.color.r != 0) {
+        return;
+      }
+      const shapes = SVGLoader.createShapes(path);
+
+      shapes.forEach((shape) => {
+        const meshGeometry = new ExtrudeBufferGeometry(shape, {
+          depth: 1,
+          bevelEnabled: false,
+        });
+        const mesh = new Mesh(meshGeometry, fillMaterial);
+
+        svgGroup.add(mesh);
+      });
+    });
+
+    const box = new Box3().setFromObject(svgGroup);
+    const size = box.getSize(new Vector3());
+    const yOffset = size.y / -2;
+    const xOffset = size.x / -2;
+
+    // Offset all of group's elements, to center them
+    svgGroup.children.forEach((item) => {
+      item.position.x = xOffset;
+      item.position.y = yOffset;
+    });
+    svgGroup.rotateX(-Math.PI / 2);
+    svgGroup.position.y = -400;
+    svgGroup.scale.set(0, 0, 0);
+
+    scene.add(svgGroup);
+
+
+    const timeLine = gsap.timeline();
+    timeLine
+        .to(boxMeshMeucci!.scale, {
+          duration: 1,
+          delay: 1,
+          x: 0.05,
+          y: 0.05,
+          z: 0.05,
+          ease: 'power2.inOut',
+        }, "enterqr")
+        .to(svgGroup.scale, {
+          duration: 1,
+          delay: 1,
+          x: 1,
+          y: 1,
+          z: 1,
+          ease: 'power2.inOut',
+        }, "enterqr")
+  }
+
 
   async function renderTargetsPrepare() {
     const loader = new FontLoader();
@@ -284,6 +393,7 @@ onMounted(async () => {
 <template>
   <v-container class="pa-0" fluid>
     <div ref="appContainer"></div>
+    <div id="test"></div>
   </v-container>
 </template>
 <style>
