@@ -2,7 +2,7 @@
 import { QrcodeStream } from 'qrcode-reader-vue3'
 import {ref} from "vue";
 
-const dialog = ref(true);
+const dialog = ref(false);
 
 function paintOutline (detectedCodes, ctx) {
   for (const detectedCode of detectedCodes) {
