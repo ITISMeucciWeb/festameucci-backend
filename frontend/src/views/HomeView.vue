@@ -195,10 +195,12 @@ onMounted(async () => {
 
   async function spawnQr() {
     const qrSVG = await new Promise<string>((resolve) => {
-      new QRCode("test", {
+      new QRCode(document.createElement("div"), {
         text: id,
         correctLevel: QRCode.CorrectLevel.H,
         drawer: "svg",
+        quietZone: 8,
+        quietZoneColor: "rgba(255,255,255, 1)",
         onRenderingEnd: (_: object, svg: string) => {
           resolve(svg)
         },
@@ -210,13 +212,11 @@ onMounted(async () => {
     const svgData = new SVGLoader().parse(qrSVG);
 
     const svgGroup = new Group();
-    const fillMaterial = new MeshBasicMaterial({color: "#F3FBFB"});
+    const fillMaterial = new MeshBasicMaterial({color: "#ffffff"});
+    const innerMaterial = new MeshBasicMaterial({color: "#000000"});
 
     svgGroup.scale.y *= -1;
     svgData.paths.forEach((path) => {
-      if (path.color.r != 0) {
-        return;
-      }
       const shapes = SVGLoader.createShapes(path);
 
       shapes.forEach((shape) => {
@@ -224,7 +224,7 @@ onMounted(async () => {
           depth: 1,
           bevelEnabled: false,
         });
-        const mesh = new Mesh(meshGeometry, fillMaterial);
+        const mesh = new Mesh(meshGeometry, path.color.r != 0 ? fillMaterial : innerMaterial);
 
         svgGroup.add(mesh);
       });
@@ -395,7 +395,6 @@ onMounted(async () => {
 <template>
   <v-container class="pa-0" fluid>
     <div ref="appContainer"></div>
-    <div id="test"></div>
   </v-container>
 </template>
 <style>
