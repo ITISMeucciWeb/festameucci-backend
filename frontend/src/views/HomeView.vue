@@ -397,7 +397,7 @@ onMounted(async () => {
     <div ref="appContainer"></div>
   </v-container>
 </template>
-<style>
+<style scoped>
 canvas {
   width: 100vw !important;
   height: 100vh !important;

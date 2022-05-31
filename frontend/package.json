@@ -15,6 +15,7 @@
     "easyqrcodejs": "^4.4.10",
     "gsap": "^3.10.4",
     "pinia": "^2.0.13",
+    "qrcode-reader-vue3": "^3.1.2",
     "roboto-fontface": "*",
     "sass": "^1.52.1",
     "three": "0.134",
