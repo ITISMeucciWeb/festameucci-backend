@@ -26,10 +26,6 @@ export class UserService {
         this.inCount = await this.UserModel.countDocuments({isIn: true});
     }
 
-    getClassByNameAndSurName(name: string, surname: string): [number, string] {
-        return [1, 'A'];
-    }
-
     async updateStateById(id: Types.ObjectId): Promise<CheckResult> {
         const user = await this.UserModel.findById(id).select({'isIn': 1, 'name': 1, 'surname': 1});
         let result: CheckResult;
@@ -64,8 +60,7 @@ export class UserService {
         const dbUser = await this.UserModel.findOne({email: email}, {}, {collation: {locale: "it", strength: 1}}).exec();
 
         if(!dbUser) {
-            const userInfo = this.getClassByNameAndSurName(name, surname);
-            return await new this.UserModel({email: email, class: userInfo[0], division: userInfo[1]}).save();
+            return await new this.UserModel({email, name, surname}).save();
         }
 
         return dbUser;
