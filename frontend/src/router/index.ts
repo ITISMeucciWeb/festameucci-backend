@@ -10,6 +10,11 @@ const router = createRouter({
             component: HomeView
         },
         {
+            path: '/scanner',
+            name: 'scanner',
+            component: () => import('../views/Scanner.vue')
+        },
+        {
             path: "/:catchAll(.*)",
             redirect: '/'
         }
