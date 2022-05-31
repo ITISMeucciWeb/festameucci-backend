@@ -50,7 +50,7 @@ let renderingHole = true;
 
 let doTheInitialAnimation = true;
 
-let id = router.currentRoute.value.params.id as string | null;
+let id = router.currentRoute.value.query.id as string | null;
 if (id) {
   localStorage.setItem("id", id);
   doTheInitialAnimation = false;
