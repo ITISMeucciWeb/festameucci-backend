@@ -19,6 +19,7 @@
     "sass": "^1.52.1",
     "three": "0.134",
     "vue": "^3.2.33",
+    "vue-router": "^4.0.15",
     "vuetify": "^3.0.0-beta.0",
     "webfontloader": "^1.0.0"
   },

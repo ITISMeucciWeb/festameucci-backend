@@ -3,6 +3,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import { ResizeObserver } from "resize-observer";
+import router from "@/router";
 
 loadFonts()
 
@@ -16,4 +17,5 @@ if(window.ResizeObserver === undefined) {
 
 createApp(App)
   .use(vuetify)
+  .use(router)
   .mount('#app')

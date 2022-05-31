@@ -29,8 +29,11 @@ import {TextGeometry} from "three/examples/jsm/geometries/TextGeometry";
 import {fragmentShader, vertexShader} from "@/shaders/shaders";
 import QRCode from "easyqrcodejs";
 import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
+import {useRouter} from "vue-router";
 
 const appContainer = ref<HTMLDivElement | null>(null);
+
+const router = useRouter();
 
 let boxMaterialMeucci: ShaderMaterial | null = null;
 let boxMeshMeucci: Mesh | null = null;
@@ -47,8 +50,7 @@ let renderingHole = true;
 
 let doTheInitialAnimation = true;
 
-let params = new URLSearchParams(window.location.search);
-let id = params.get("id");
+let id = router.currentRoute.value.params.id as string | null;
 if (id) {
   localStorage.setItem("id", id);
   doTheInitialAnimation = false;

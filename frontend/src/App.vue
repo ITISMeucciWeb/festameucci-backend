@@ -1,14 +1,11 @@
 <template>
   <v-app>
     <v-main>
-      <HomeView/>
+      <router-view/>
     </v-main>
   </v-app>
 </template>
 
-<script setup lang="ts">
-import HomeView from "@/views/HomeView.vue";
-</script>
 <style>
 html {
   overflow-y: hidden !important;
