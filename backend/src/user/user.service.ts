@@ -4,6 +4,7 @@ import {InjectModel} from "@nestjs/mongoose";
 import {User, UserDocument} from "./user.entity";
 
 import { MongodbPubSub } from 'graphql-mongoose-subscriptions';
+import {Result} from "./user.resolver";
 
 const pubsub = new MongodbPubSub();
 
@@ -26,7 +27,7 @@ export class UserService {
         this.inCount = await this.UserModel.countDocuments({isIn: true});
     }
 
-    async updateStateById(id: Types.ObjectId): Promise<CheckResult> {
+    async updateStateById(id: Types.ObjectId): Promise<Result> {
         const user = await this.UserModel.findById(id).select({'isIn': 1, 'name': 1, 'surname': 1});
         let result: CheckResult;
         if(!user) {
@@ -43,7 +44,7 @@ export class UserService {
             }
         }
 
-        return result;
+        return {result, user};
     }
 
     updateInCount(){
