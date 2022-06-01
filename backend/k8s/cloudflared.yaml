@@ -92,7 +92,6 @@ data:
       - hostname: api.meucci.party
         service: http://web:3000
       - hostname: tunnel.meucci.party
-        originRequest:
-          bastionMode: true
+        service: tcp://mongo:27017
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
       - service: http_status:404

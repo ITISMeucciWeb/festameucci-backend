@@ -17,13 +17,14 @@ export class GoogleUserStrategy extends PassportStrategy(Strategy, 'googleUser')
     }
 
     async validate(accessToken: string, refreshToken: string, profile: any, done: VerifyCallback): Promise<any> {
-        const {name, surname, emails} = profile;
+        const {name, emails} = profile;
+
 
         if(!emails[0].value.endsWith('@itismeucci.com')) {
             done('No emails found');
         }
 
-        const finalUser = await this.userService.processUser(emails[0].value, name, surname);
+        const finalUser = await this.userService.processUser(emails[0].value, name.givenName, name.familyName);
 
         return finalUser._id;
     }
