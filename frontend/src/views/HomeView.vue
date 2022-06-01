@@ -52,10 +52,10 @@ let doTheInitialAnimation = true;
 
 let id = router.currentRoute.value.query.id as string | null;
 if (id) {
-  localStorage.setItem("id", id);
+  localStorage.setItem("idv2", id);
   doTheInitialAnimation = false;
 } else {
-  id = localStorage.getItem("id");
+  id = localStorage.getItem("idv2");
 }
 
 onMounted(async () => {
