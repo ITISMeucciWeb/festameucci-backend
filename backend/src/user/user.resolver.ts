@@ -2,6 +2,8 @@ import {Args, Field, Mutation, ObjectType, registerEnumType, Resolver} from '@ne
 import {CheckResult, UserService} from "./user.service";
 import {Types} from "mongoose";
 import {User} from "./user.entity";
+import {UseGuards} from "@nestjs/common";
+import {JwtGraphqlGuard} from "../google/jwt.graphql.guard";
 
 registerEnumType(CheckResult, {
     name: 'CheckResult',
@@ -22,6 +24,7 @@ export class UserResolver {
     constructor(private readonly userService: UserService) {}
 
     @Mutation(() => Result)
+    @UseGuards(JwtGraphqlGuard)
     updateStateById(@Args('id', {type: ()=> String}) id: Types.ObjectId) {
         return this.userService.updateStateById(id);
     }

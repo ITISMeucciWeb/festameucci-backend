@@ -4,6 +4,22 @@ import { QrcodeStream } from 'qrcode-reader-vue3'
 import {ref} from "vue";
 import { useMutation } from '@vue/apollo-composable'
 import gql from "graphql-tag";
+import {useRouter} from "vue-router";
+import {apolloClient} from "@/apollo";
+const router = useRouter();
+
+let token = router.currentRoute.value.query.token as string | null;
+if (token) {
+  localStorage.setItem('token', token);
+  router.replace({
+    ...router.currentRoute,
+    query: {
+      token: null
+    }
+  })
+} else{
+  window.location.href = import.meta.env.VITE_BACKEND_API_URL + "google/advancedRedirect";
+}
 
 const {mutate: setUserStateById} = useMutation(gql`
       mutation ($userId: String!) {
