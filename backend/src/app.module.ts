@@ -15,11 +15,9 @@ import {ConfigModule} from "@nestjs/config";
     imports: [
         ConfigModule.forRoot(),
         GraphQLModule.forRoot<ApolloDriverConfig>({
+            playground: false,
             driver: ApolloDriver,
-            autoSchemaFile: join(process.cwd(), 'schema.gql'),
-            subscriptions: {
-                'graphql-ws': true
-            }
+            autoSchemaFile: join(process.cwd(), 'schema.gql')
         }),
         MongooseModule.forRoot(`mongodb://${process.env.DB_HOST || "localhost"}/festameucci`),
         UserModule,

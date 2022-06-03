@@ -13,7 +13,7 @@ export class Result {
     @Field(() => CheckResult)
     result: CheckResult;
 
-    @Field(() => User)
+    @Field(() => User, {nullable: true})
     user: User;
 }
 
@@ -21,7 +21,7 @@ export class Result {
 export class UserResolver {
     constructor(private readonly userService: UserService) {}
 
-    @Mutation(() => CheckResult)
+    @Mutation(() => Result)
     updateStateById(@Args('id', {type: ()=> String}) id: Types.ObjectId) {
         return this.userService.updateStateById(id);
     }

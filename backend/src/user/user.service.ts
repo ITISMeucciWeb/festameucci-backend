@@ -17,7 +17,7 @@ export class UserService {
     constructor(@InjectModel(User.name) private UserModel: Model<UserDocument>) {}
 
     async updateStateById(id: Types.ObjectId): Promise<Result> {
-        const user = await this.UserModel.findById(id).select({'isIn': 1, 'name': 1, 'surname': 1});
+        const user = await this.UserModel.findById(id).select({'isIn': 1, 'name': 1, 'surname': 1, 'email': 1});
         let result: CheckResult;
         if(!user) {
             result = CheckResult.NotFound;
