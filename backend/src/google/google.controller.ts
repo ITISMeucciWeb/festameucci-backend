@@ -22,7 +22,7 @@ export class GoogleController {
         if(req.user) {
             res.redirect(`${process.env.FRONTEND_URL}/scanner?token=${req.user}`)
         }else{
-            res.redirect(`${process.env.FRONTEND_URL}/scanner`)
+            res.redirect(`${process.env.FRONTEND_URL}/authFailed`)
         }
     }
 
