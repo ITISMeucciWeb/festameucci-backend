@@ -25,6 +25,10 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
 
         const finalUser = await this.userService.processUser(emails[0].value, name.givenName, name.familyName);
 
+        if(!finalUser.admin){
+            done('Not admin');
+        }
+
         return await this.jwtService.signAsync(finalUser.toJSON());
     }
 }
