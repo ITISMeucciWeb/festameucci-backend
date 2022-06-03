@@ -8,7 +8,7 @@ import {useRouter} from "vue-router";
 import {apolloClient} from "@/apollo";
 const router = useRouter();
 
-let token = router.currentRoute.value.query.token as string | null;
+let token = (router.currentRoute.value.query.token || localStorage.getItem('token')) as string | null;
 if (token) {
   localStorage.setItem('token', token);
   router.replace({
