@@ -1,10 +1,55 @@
-<script setup>
+<script setup lang="ts">
+// @ts-ignore
 import { QrcodeStream } from 'qrcode-reader-vue3'
 import {ref} from "vue";
+import { useMutation } from '@vue/apollo-composable'
+import gql from "graphql-tag";
+
+const {mutate: setUserStateById} = useMutation(gql`
+      mutation ($userId: String!) {
+        updateStateById (id: $userId) {
+          result
+          user {
+            name
+            surname
+            email
+        }
+      }
+   }
+`);
 
 const dialog = ref(false);
 
-function paintOutline (detectedCodes, ctx) {
+const state = ref<string | null>(null);
+const name = ref<string | null>(null);
+const surname = ref<string | null>(null);
+const email = ref<string | null>(null);
+
+async function decoded(decodedUserId: string){
+  name.value = null;
+  surname.value = null;
+  email.value = null;
+  dialog.value = false;
+
+  let result;
+  try {
+    result = await setUserStateById({userId: decodedUserId});
+  }catch (e) {
+    state.value = "NotFound";
+    dialog.value = true;
+    return;
+  }
+  if(result == null){
+    return;
+  }
+  state.value = result.data.updateStateById.result;
+  name.value = result.data.updateStateById.user.name;
+  surname.value = result.data.updateStateById.user.surname;
+  email.value = result.data.updateStateById.user.email;
+  dialog.value = true;
+}
+
+function paintOutline (detectedCodes: any, ctx: any) {
   for (const detectedCode of detectedCodes) {
     const [ firstPoint, ...otherPoints ] = detectedCode.cornerPoints
 
@@ -51,25 +96,25 @@ function paintOutline (detectedCodes, ctx) {
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>STATO</v-list-item-title>
-                <v-list-item-subtitle>STATOSTATOSTATOSTATOSTATOSTATOSTATO</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ state }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
+              <v-list-item-content v-if="name">
                 <v-list-item-title>Nome</v-list-item-title>
-                <v-list-item-subtitle>TEST</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ name }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
+              <v-list-item-content v-if="surname">
                 <v-list-item-title>Cognome</v-list-item-title>
-                <v-list-item-subtitle>TEST</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ surname }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
+              <v-list-item-content v-if="email">
                 <v-list-item-title>EMAIL</v-list-item-title>
-                <v-list-item-subtitle>TEST@test.test</v-list-item-subtitle>
+                <v-list-item-subtitle>{{email}}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -77,7 +122,7 @@ function paintOutline (detectedCodes, ctx) {
         </v-card>
       </v-dialog>
     </v-row>
-    <QrcodeStream @decode="dialog = true" :track="paintOutline"></QrcodeStream>
+    <QrcodeStream @decode="decoded" :track="paintOutline"></QrcodeStream>
   </v-container>
 </template>
 
