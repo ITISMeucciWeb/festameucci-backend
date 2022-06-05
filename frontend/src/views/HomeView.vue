@@ -207,7 +207,6 @@ onMounted(async () => {
         backgroundImageAlpha: 0
       });
     })
-    console.log(qrSVG);
 
     const svgData = new SVGLoader().parse(qrSVG);
 
