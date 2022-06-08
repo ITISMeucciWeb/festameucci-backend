@@ -3,7 +3,9 @@ import {Field, ObjectType} from "@nestjs/graphql";
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @ObjectType()
-@Schema()
+@Schema({
+    timestamps: true
+})
 export class User{
     @Field(()=>String)
     _id: Types.ObjectId;
