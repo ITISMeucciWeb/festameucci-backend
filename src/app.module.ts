@@ -19,7 +19,7 @@ import {ConfigModule} from "@nestjs/config";
             driver: ApolloDriver,
             autoSchemaFile: join(process.cwd(), 'schema.gql')
         }),
-        MongooseModule.forRoot(`mongodb://${process.env.DB_HOST || "localhost"}/festameucci`),
+        MongooseModule.forRoot(process.env.MONGO_URL || `mongodb://${process.env.DB_HOST || "localhost"}/festameucci`),
         UserModule,
         GoogleModule
     ],
