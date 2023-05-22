@@ -26,7 +26,7 @@ jobs:
           # customization
           OCO_OPENAI_MAX_TOKENS: 500
           OCO_OPENAI_BASE_PATH: ''
-          OCO_DESCRIPTION: false
-          OCO_EMOJI: false
+          OCO_DESCRIPTION: true
+          OCO_EMOJI: true
           OCO_MODEL: gpt-4
           OCO_LANGUAGE: en
