@@ -12,7 +12,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
             clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
             callbackURL: process.env.API_BACKEND + '/google/advancedRedirect',
             scope: ['email', 'profile'],
-            authorizationURL: 'https://accounts.google.com/o/oauth2/v2/auth',
+            authorizationURL: 'https://accounts.google.com/o/oauth2/v2/auth?hd=itismeucci.com',
         });
     }
 
